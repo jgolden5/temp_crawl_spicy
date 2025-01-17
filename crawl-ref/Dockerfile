@@ -1,5 +1,5 @@
 ARG web_host=crawl.ufetubus.com
-ARG crawl_repo=https://github.com/jeremygurr/crawl_spicy.git
+ARG crawl_repo=https://github.com/jgolden5/temp_crawl_spicy.git
 ARG version
 
 ARG web_path=/usr/www
