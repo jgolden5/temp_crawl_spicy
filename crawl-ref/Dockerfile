@@ -106,7 +106,7 @@ ENV conf_path /etc/nginx
 ENV uid 1000
 ENV gid 1000
 ENV crawl_port 8081
-ENV nginx_port 80
+ENV nginx_port 81
 
 EXPOSE ${crawl_port}
 EXPOSE ${nginx_port}
