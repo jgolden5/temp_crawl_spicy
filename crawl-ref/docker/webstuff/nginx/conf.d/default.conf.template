@@ -1,12 +1,16 @@
 upstream crawlweb {
     server localhost:${crawl_port};
+    /*server 127.0.0.1:${crawl_port1};
+    server 127.0.0.1:${crawl_port2};
+    server 127.0.0.1:${crawl_port3};
+    health_check interval=60;*/
 }
 
 server {
-    listen       ${nginx_port};
+    listen ${nginx_port};
 
     location ~ /morgue/.+ {
-        root   /var/crawl/rcs;
+        root /var/crawl/rcs;
         autoindex on;
         rewrite_log on;
         rewrite /morgue/(.*) /\$1;
