@@ -226,7 +226,7 @@ end
 function start (doc)
         -- Generate index file
         if (#doc.files > 0 or #doc.modules > 0) and (not options.noindexpage) then
-                local filename = options.output_dir.."index.html"
+                local filename = options.output_dir.."banner.html"
                 logger:info(string.format("generating file `%s'", filename))
                 local f = lfs.open(filename, "w")
                 assert(f, string.format("could not open `%s' for writing", filename))

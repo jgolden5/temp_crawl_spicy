@@ -10,7 +10,7 @@ ARG crawl_ref=${checkout_dir}/crawl/crawl-ref
 
 # this gcc can be latest, we just pin it to a version for consistency and rebuild speed
 #   so if it doesn't work, just update to the latest version and pin it to that
-FROM alpine:3.7 as os_base
+FROM alpine:3.7 AS os_base
 RUN apk add --no-cache \
     alpine-sdk \
     bash \
@@ -34,7 +34,7 @@ RUN apk add --no-cache \
 #    pngcrush \
 #    && rm -rf /var/lib/apt/lists/*
 
-FROM os_base as build_base
+FROM os_base AS build_base
 
 RUN apk add --no-cache \
     freetype-dev \
@@ -61,7 +61,7 @@ ARG EXTRA_LIBS="-lexecinfo"
 RUN make -j6 NOASSERTS=True SHAREDDIR=${shared_dir} prefix=${web_path} USE_DGAMELAUNCH=y WEBTILES=y "EXTRA_LIBS=$EXTRA_LIBS"
 RUN make webserver install -j6 NOASSERTS=True SHAREDDIR=${shared_dir} prefix=${web_path} USE_DGAMELAUNCH=y WEBTILES=y "EXTRA_LIBS=$EXTRA_LIBS"
 
-FROM python:2-alpine3.7 as crawlweb
+FROM python:2-alpine3.7 AS crawlweb
 ARG web_host
 ARG web_path
 ARG shared_dir
@@ -97,7 +97,7 @@ COPY --from=build_base ${web_path}/ ${web_path}/
 COPY --from=build_base ${crawl_ref}/settings/init.txt ${web_path}
 COPY --from=build_base ${crawl_ref}/docker/webstuff/ ${web_path}/
 COPY --from=build_base ${crawl_ref}/docker/webstuff/banner.html ${web_path}/webserver/templates/
-COPY --from=build_base ${crawl_ref}/docker/webstuff/index.html ${web_path}/webserver/
+COPY --from=build_base ${crawl_ref}/docker/webstuff/banner.html ${web_path}/webserver/
 COPY --from=build_base ${crawl_ref}/docker/scripts/ ${user_data}/scripts/
 
 WORKDIR ${web_path}

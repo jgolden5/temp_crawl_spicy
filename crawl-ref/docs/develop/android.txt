@@ -18,10 +18,10 @@ clang toolchains.
 Build Process
 -------------
 
- * Get the latest Android SDK from http://developer.android.com/sdk/index.html
+ * Get the latest Android SDK from http://developer.android.com/sdk/banner.html
  * Run "android" and fetch the files for the android-12 platform
  * Get the latest Android NDK, r10c at time of writing:
-   http://developer.android.com/sdk/ndk/index.html
+   http://developer.android.com/sdk/ndk/banner.html
  * Configure your PATH. Assuming you've installed the SDK in $SDK and the
    NDK in $NDK: export PATH=$SDK/tools:$SDK/platform-tools:$NDK:$PATH
  * Ensure that you have all of the dependent host libraries required to
