@@ -2,15 +2,15 @@ http {
   upstream crawlweb {
       zone crawlweb 64k;
       server {
-        listen ${crawl_port1}; 
+        listen ${crawl_port}; 
         server_name crawlweb_1;
       }
       server {
-        listen ${crawl_port2}; 
+        listen ${crawl_port}; 
         server_name crawlweb_2;
       }
       server {
-        listen ${crawl_port3}; 
+        listen ${crawl_port}; 
         server_name crawlweb_3;
       }
   }

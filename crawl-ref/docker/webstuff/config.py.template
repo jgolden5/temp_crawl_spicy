@@ -10,9 +10,7 @@ dgl_mode = True
 
 bind_nonsecure = True # Set to false to only use SSL
 bind_address = ""
-bind_port1 = ${crawl_port1}
-bind_port2 = ${crawl_port2}
-bind_port3 = ${crawl_port3}
+bind_port = ${crawl_port}
 # Or listen on multiple address/port pairs (overriding the above) with:
 # bind_pairs = (
 #     ("127.0.0.1", 8080),
