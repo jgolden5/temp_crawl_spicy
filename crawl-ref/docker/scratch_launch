@@ -1,0 +1,6 @@
+#!/bin/bash
+version=0.23.0
+clean=true docker/build_docker_crawlweb_image $version && echo "docker image build succeeded ✅" || echo "docker image build failed ❌"
+docker/launch_docker_container1 && echo "docker container 1 launch succeeded ✅" || echo "docker container 1 launch failed ❌"
+docker/launch_docker_container2 && echo "docker container 2 launch succeeded ✅" || echo "docker container 2 launch failed ❌"
+docker/launch_docker_container3 && echo "docker container 3 launch succeeded ✅" || echo "docker container 3 launch failed ❌"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+debug=${debug:-false}
+
+common_parameters="--rm -p 80:80 --name envoy ufetubus/envoy"
+if [ "$debug" == true ]; then
+  echo "starting debug container..."
+  docker run -it "$@" $common_parameters
+else
+  echo "starting normal container..."
+  docker run -d "$@" $common_parameters
+fi

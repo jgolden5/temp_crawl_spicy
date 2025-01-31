@@ -26,7 +26,7 @@ if [ ! "$(docker volume ls -q | grep ^crawlweb$)" -o "$pretend" == true ]; then
   $prefix docker volume create crawlweb 
 fi
 
-common_parameters="--rm -v crawlweb:/var/crawl -p 81:80 -p 8081:8081 --name crawlweb1 ufetubus/crawlweb"
+common_parameters="--rm -v crawlweb:/var/crawl -p 8081:8081 --name crawlweb1 ufetubus/crawlweb"
 if [ "$debug" == true ]; then
   echo "starting debug container..."
   $prefix docker run -it "$@" -v crawldebug:/usr/www $common_parameters $command
