@@ -26,14 +26,27 @@ if [ ! "$(docker volume ls -q | grep ^crawlweb$)" -o "$pretend" == true ]; then
   $prefix docker volume create crawlweb 
 fi
 
-common_parameters="--rm -v crawlweb:/var/crawl -p 8081:8081 --name crawlweb1 ufetubus/crawlweb"
-if [ "$debug" == true ]; then
-  echo "starting debug container..."
-  $prefix docker run -it "$@" -v crawldebug:/usr/www $common_parameters $command
+if [[ "$1" =~ ^[0-9]$ ]]; then
+  num=$1
 else
-  echo "starting normal container..."
-  $prefix docker run -d "$@" $common_parameters $command
+  echo "using default number of containers 3"
+  num=3
 fi
+
+echo num = $num
+i=1
+
+while (( i <= num )); do 
+  common_parameters="--rm -v crawlweb:/var/crawl -p 808${i}:8081 --name crawlweb${i} ufetubus/crawlweb"
+  if [ "$debug" == true ]; then
+    echo "starting debug container #${i}"
+    $prefix docker run -it "$@" -v crawldebug:/usr/www $common_parameters $command
+  else
+    echo "starting normal container #${i}"
+    $prefix docker run -d "$@" $common_parameters $command
+  fi
+  (( i++ ))
+done
 
 echo "done."
 
