@@ -7,6 +7,7 @@ debug=${debug:-false}
 pretend=${pretend:-false}
 clean=${clean:-false}
 command=${command:-}
+containers=${containers:-}
 
 if [ "$pretend" == true ]; then
   echo "Pretend mode on, not executing commands."
@@ -26,17 +27,14 @@ if [ ! "$(docker volume ls -q | grep ^crawlweb$)" -o "$pretend" == true ]; then
   $prefix docker volume create crawlweb 
 fi
 
-if [[ "$1" =~ ^[0-9]$ ]]; then
-  num=$1
-else
+if [[ ! "$containers" ]]; then
   echo "using default number of containers 3"
-  num=3
+  containers=3
 fi
 
-echo num = $num
 i=1
 
-while (( i <= num )); do 
+while (( i <= containers )); do 
   common_parameters="--rm -v crawlweb:/var/crawl -p 808${i}:8081 --name crawlweb${i} ufetubus/crawlweb"
   if [ "$debug" == true ]; then
     echo "starting debug container #${i}"
@@ -47,6 +45,4 @@ while (( i <= num )); do
   fi
   (( i++ ))
 done
-
-echo "done."
 
