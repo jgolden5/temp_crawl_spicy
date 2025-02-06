@@ -35,7 +35,7 @@ fi
 i=1
 
 while (( i <= containers )); do 
-  common_parameters="--rm -v crawlweb:/var/crawl -p 808${i}:8081 --name crawlweb${i} ufetubus/crawlweb"
+  common_parameters="--network=crawl_net --rm -v crawlweb:/var/crawl -p 808${i}:8081 --name crawlweb${i} ufetubus/crawlweb"
   if [ "$debug" == true ]; then
     echo "starting debug container #${i}"
     $prefix docker run -it "$@" -v crawldebug:/usr/www $common_parameters $command
