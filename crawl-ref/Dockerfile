@@ -106,10 +106,8 @@ ENV conf_path /etc/nginx
 ENV uid 1000
 ENV gid 1000
 ENV crawl_port 8081
-ENV nginx_port 80
 
 EXPOSE ${crawl_port}
-EXPOSE ${nginx_port}
 
 RUN rm config.py 2>/dev/null; true \
   && ./hydrate config.py init-player.sh nginx/conf.d/default.conf launch \
