@@ -27,10 +27,15 @@ static_resources:
           - name: envoy.filters.http.router
             typed_config:
                 "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
-
   clusters:
   - name: crawl_service
     type: STRICT_DNS
+    health_checks:
+    - timeout: 1s
+      interval: 2s
+      unhealthy_threshold: 2
+      healthy_threshold: 1
+      tcp_health_check: {}
     load_assignment:
       cluster_name: crawl_service
       endpoints:
