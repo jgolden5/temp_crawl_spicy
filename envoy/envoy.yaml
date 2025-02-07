@@ -21,6 +21,8 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: crawl_service
+                  upgrade_configs:
+                  - upgrade_type: "websocket"
           http_filters:
           - name: envoy.filters.http.router
             typed_config:

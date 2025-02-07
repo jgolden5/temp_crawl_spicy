@@ -1,4 +1,0 @@
-#!/bin/bash
-docker/launch_docker_container1 && echo "docker container 1 launch succeeded ✅" || echo "docker container 1 launch failed ❌"
-docker/launch_docker_container2 && echo "docker container 2 launch succeeded ✅" || echo "docker container 2 launch failed ❌"
-docker/launch_docker_container3 && echo "docker container 3 launch succeeded ✅" || echo "docker container 3 launch failed ❌"
