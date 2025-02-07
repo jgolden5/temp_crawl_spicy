@@ -8,5 +8,5 @@ if [ "$debug" == true ]; then
   docker run $common_parameters -it --name envoy-debug ufetubus/envoy envoy -c envoy.yaml -l debug
 else
   echo "starting normal container..."
-  docker run $common_parameters -d --name envoy ufetubus/envoy
+  docker run $common_parameters -d --name envoy ufetubus/envoy envoy -c envoy.yaml
 fi
