@@ -5,7 +5,7 @@ debug=${debug:-false}
 common_parameters="--rm --network=crawl_net -p 80:80"
 if [ "$debug" == true ]; then
   echo "starting debug container..."
-  docker run $common_parameters -it --name envoy-debug ufetubus/envoy envoy -c envoy.yaml -l debug
+  docker run $common_parameters -it --name envoy-debug ufetubus/envoy envoy -c envoy.yaml -l debug | grep -v "flushing stats|dns resolution|refresh rate reset|dns_resolver"
 else
   echo "starting normal container..."
   docker run $common_parameters -d --name envoy ufetubus/envoy envoy -c envoy.yaml
