@@ -43,5 +43,15 @@ static_resources:
         - endpoint:
             address:
               socket_address:
+                address: crawlweb1
+                port_value: 8081
+        - endpoint:
+            address:
+              socket_address:
+                address: crawlweb2
+                port_value: 8082
+        - endpoint:
+            address:
+              socket_address:
                 address: crawlweb3
                 port_value: 8083
