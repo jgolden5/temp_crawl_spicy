@@ -30,6 +30,7 @@ static_resources:
   clusters:
   - name: crawl_service
     type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
     load_assignment:
       cluster_name: crawl_service
       endpoints:
