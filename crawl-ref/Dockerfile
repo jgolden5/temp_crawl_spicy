@@ -105,10 +105,8 @@ WORKDIR ${web_path}
 ENV conf_path /etc/nginx
 ENV uid 1000
 ENV gid 1000
-ENV crawl_port 8083
+ENV crawl_port 8081
 
-EXPOSE 8081
-EXPOSE 8082
 EXPOSE ${crawl_port}
 
 RUN rm config.py 2>/dev/null; true \
