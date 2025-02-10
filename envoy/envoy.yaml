@@ -30,12 +30,6 @@ static_resources:
   clusters:
   - name: crawl_service
     type: STRICT_DNS
-    health_checks:
-    - timeout: 1s
-      interval: 2s
-      unhealthy_threshold: 2
-      healthy_threshold: 1
-      tcp_health_check: {}
     load_assignment:
       cluster_name: crawl_service
       endpoints:
@@ -49,9 +43,15 @@ static_resources:
             address:
               socket_address:
                 address: crawlweb2
-                port_value: 8082
+                port_value: 8081
         - endpoint:
             address:
               socket_address:
                 address: crawlweb3
-                port_value: 8083
+                port_value: 8081
+    health_checks:
+    - timeout: 1s
+      interval: 2s
+      unhealthy_threshold: 2
+      healthy_threshold: 1
+      tcp_health_check: {}
