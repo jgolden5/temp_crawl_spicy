@@ -7,8 +7,6 @@ debug=${debug:-false}
 pretend=${pretend:-false}
 clean=${clean:-false}
 command=${command:-}
-containers=${containers:-}
-explicit=${explicit:-} #specifically choose container 2, for example, used for testing. If explicit is set, then only one container will run no matter what
 
 if [ "$pretend" == true ]; then
   echo "Pretend mode on, not executing commands."
@@ -28,31 +26,15 @@ if [ ! "$(docker volume ls -q | grep ^crawlweb$)" -o "$pretend" == true ]; then
   $prefix docker volume create crawlweb 
 fi
 
-if [[ ! "$containers" ]] && [[ ! "$explicit" ]]; then
-  echo "using default number of containers 3"
-  containers=3
-elif [[ "$explicit" ]]; then
-  containers=$explicit
-fi
+pods=${pods:-"1 2 3"}
 
-if [[ $explicit ]]; then
-i=$explicit
-else
-i=1
-fi
-
-while (( i <= containers )); do 
-  common_parameters="--network=crawl_net --rm -v crawlweb:/var/crawl -p 808${i}:8081 --name crawlweb${i} ufetubus/crawlweb"
+for pod in $pods; do 
+  common_parameters="--network=crawl_net --rm -v crawlweb:/var/crawl -p 808${pod}:8081 --name crawlweb${pod} ufetubus/crawlweb"
   if [ "$debug" == true ]; then
-    echo "starting debug container #${i}"
+    echo "starting debug container #${pod}"
     $prefix docker run -it "$@" -v crawldebug:/usr/www $common_parameters $command
   else
-    echo "starting normal container #${i}"
+    echo "starting normal container #${pod}"
     $prefix docker run -d "$@" $common_parameters $command
-  fi
-  if [[ ! $explicit ]]; then
-    (( i++ ))
-  else
-    break
   fi
 done
